@@ -174,6 +174,7 @@ class ListsController < ApplicationController
     end
 
     @list.categories << @categories
+    @list.user = current_user
 
     respond_to do |format|
       if @list.save

@@ -1,6 +1,7 @@
 class List < ActiveRecord::Base
   has_one   :address
   has_and_belongs_to_many :categories, :readonly => true
+  belongs_to :user
 
   validates_presence_of   :name, :url, :description, :address
   validates_uniqueness_of :url

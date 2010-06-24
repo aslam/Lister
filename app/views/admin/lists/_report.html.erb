@@ -21,20 +21,26 @@
         <th> Mobile </th>
         <th> Phone </th>
         <th> Fax </th>
+        <th> Created By </th>
     </tr>
     <% @lists.each do |list| %>
         <tr>
             <td> <%= list.name %> </td>
             <td> <%= list.url %> </td>
             <td> <%= list.description %> </td>
-            <% list.categories.each do |cat| %>
-              <% cat.self_and_ancestors.each do |an| %>
-                <td> <%= an.name %> </td>
-              <% end %>
-              <% if cat.self_and_ancestors.size < 4 %>
-                <% 4-cat.self_and_ancestors.size.times do |i| %>
-                  <td> - </td>
-                <% end %>
+            <% categories = list.categories %>
+            <% 3.times do |i| %>
+              <% if categories[i]  %>
+                <% ancestors = categories[i].self_and_ancestors %>
+                <td> <%= ancestors[0].nil? ? "-" : ancestors[0].name  %> </td>
+                <td> <%= ancestors[1].nil? ? "-" : ancestors[1].name %> </td>
+                <td> <%= ancestors[2].nil? ? "-" : ancestors[2].name %> </td>
+                <td> <%= ancestors[3].nil? ? "-" : ancestors[3].name %> </td>
+              <% else %>
+                <td> - </td>
+                <td> - </td>
+                <td> - </td>
+                <td> - </td>
               <% end %>
             <% end %>
             <td> <%= list.address.location %> </td>
@@ -43,6 +49,7 @@
             <td> <%= list.address.mobile %> </td>
             <td> <%= list.address.phone %> </td>
             <td> <%= list.address.fax %> </td>
+            <td> <%= list.user.nil? ? "" : "(#{list.user.id}) #{list.user.login}" %> </td>
         </tr>
     <% end %>
 </table>

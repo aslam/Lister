@@ -21,6 +21,7 @@
         <th> Mobile </th>
         <th> Phone </th>
         <th> Fax </th>
+        <th> Created By </th>
     </tr>
     <% @lists.each do |list| %>
         <tr>
@@ -43,6 +44,7 @@
             <td> <%= list.address.mobile %> </td>
             <td> <%= list.address.phone %> </td>
             <td> <%= list.address.fax %> </td>
+            <td> <%= list.user.nil? ? "" : "(#{list.user.id}) #{list.user.login}" %> </td>
         </tr>
     <% end %>
 </table>

@@ -174,6 +174,7 @@ class Admin::ListsController < Admin::BaseAdminController
     end
 
     @list.categories << @categories
+    @list.user = current_admin
 
     respond_to do |format|
       if @list.save
