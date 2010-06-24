@@ -15,6 +15,12 @@
         <th> Category 3 - 2 </th>
         <th> Category 3 - 3 </th>
         <th> Category 3 - 4 </th>
+        <th> State </th>
+        <th> Name </th>
+        <th> Email </th>
+        <th> Mobile </th>
+        <th> Phone </th>
+        <th> Fax </th>
     </tr>
     <% @lists.each do |list| %>
         <tr>
@@ -31,6 +37,12 @@
                 <% end %>
               <% end %>
             <% end %>
+            <td> <%= list.address.location %> </td>
+            <td> <%= list.address.name %> </td>
+            <td> <%= list.address.email %> </td>
+            <td> <%= list.address.mobile %> </td>
+            <td> <%= list.address.phone %> </td>
+            <td> <%= list.address.fax %> </td>
         </tr>
     <% end %>
 </table>

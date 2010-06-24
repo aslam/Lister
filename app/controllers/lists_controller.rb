@@ -65,15 +65,12 @@ class ListsController < ApplicationController
     if !params['1categories'][:id].blank?
       if params['1subcats1']
         s1id = params['1subcats1'][:id].to_i
-        puts "Cat 1 Sub 1 :" + s1id.to_s
         if s1id > 1
           if params['1subcats2']
             s2id = params['1subcats2'][:id].to_i
-            puts "Cat 1 Sub 2 :" + s2id.to_s
             if s2id > 1
               if params['1subcats3']
                 s3id = params['1subcats3'][:id].to_i
-                puts "Cat 1 Sub 3 :" + s3id.to_s
                 if s3id > 1
                   category = Category.find(s3id)
                   @categories << category
@@ -86,7 +83,6 @@ class ListsController < ApplicationController
                 @categories << category
               end
             else
-              puts "Finding sub category 1"
               category = Category.find(s1id)
               @categories << category
             end
@@ -95,7 +91,6 @@ class ListsController < ApplicationController
             @categories << category
           end
         else
-          puts "Couldn't find subcategories so finding category 1"
           category = Category.find(params['1categories'][:id])
           @categories << category
         end
@@ -107,15 +102,12 @@ class ListsController < ApplicationController
     if !params['2categories'][:id].blank?
       if params['2subcats1']
         s1id = params['2subcats1'][:id].to_i
-        puts "Cat 2 Sub 1 :" + s1id.to_s
         if s1id > 1
           if params['2subcats2']
             s2id = params['2subcats2'][:id].to_i
-            puts "Cat 2 Sub 2 :" + s2id.to_s
             if s2id > 1
               if params['2subcats3']
                 s3id = params['2subcats3'][:id].to_i
-                puts "Cat 2 Sub 3 :" + s3id.to_s
                 if s3id > 1
                   category = Category.find(s3id)
                   @categories << category
@@ -128,7 +120,6 @@ class ListsController < ApplicationController
                 @categories << category
               end
             else
-              puts 'finding subcategories 2'
               category = Category.find(s1id)
               @categories << category
             end
@@ -137,7 +128,6 @@ class ListsController < ApplicationController
             @categories << category
           end
         else
-          puts "Couldn't find subcategories so finding category 2"
           category = Category.find(params['2categories'][:id])
           @categories << category
         end
@@ -149,15 +139,12 @@ class ListsController < ApplicationController
     if !params['3categories'][:id].blank?
       if params['3subcats1']
         s1id = params['3subcats1'][:id].to_i
-        puts "Cat 3 Sub 1 :" + s1id.to_s
         if s1id > 1
           if params['3subcats2']
             s2id = params['3subcats2'][:id].to_i
-            puts "Cat 3 Sub 2 :" + s2id.to_s
             if s2id > 1
               if params['3subcats3']
                 s3id = params['3subcats3'][:id].to_i
-                puts "Cat 3 Sub 3 :" + s3id.to_s
                 if s3id > 1
                   category = Category.find(s3id)
                   @categories << category
@@ -170,7 +157,6 @@ class ListsController < ApplicationController
                 @categories << category
               end
             else
-              puts 'finding subcategories 3'
               category = Category.find(s1id)
               @categories << category
             end
@@ -179,7 +165,6 @@ class ListsController < ApplicationController
             @categories << category
           end
         else
-          puts "Couldn't find subcategories so finding category 3"
           category = Category.find(params['3categories'][:id])
           @categories << category
         end
@@ -188,7 +173,6 @@ class ListsController < ApplicationController
       puts "3 Categories is blank!"
     end
 
-    puts "No. of categories selected: " + @categories.size.to_s
     @list.categories << @categories
 
     respond_to do |format|
@@ -197,7 +181,8 @@ class ListsController < ApplicationController
         format.html { redirect_to(@list) }
         format.xml  { render :xml => @list, :status => :created, :location => @list }
       else
-        format.html { render :action => "new" }
+        flash[:notice] = 'Unable to save List details. Please check wheter all mandatory fields are filled!'
+        format.html { redirect_to new_list_url }
         format.xml  { render :xml => @list.errors, :status => :unprocessable_entity }
       end
     end

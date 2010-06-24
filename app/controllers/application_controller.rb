@@ -1,9 +1,10 @@
 class ApplicationController < ActionController::Base
     helper :all
-    protect_from_forgery 
+    protect_from_forgery
     filter_parameter_logging :password, :password_confirmation
+    helper_method :current_user_session, :current_user
 
-    private 
+    private
     def current_user_session
         return @current_user_session if defined?(@current_user_session)
         @current_user_session = UserSession.find
@@ -41,3 +42,4 @@ class ApplicationController < ActionController::Base
         session[:return_to] = nil
     end
 end
+
