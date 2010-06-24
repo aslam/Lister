@@ -1,0 +1,22 @@
+<% counter = category_counter + 1 %>
+<p>
+  <%= label_tag "Category ID #{counter}:" %><br />
+  <% fields_for "#{counter}categories", category do |f| %>
+    <%= f.select :id, @categories.collect { |c| [c.name, c.id] }, { :include_blank => true } %>
+  <% end %>
+
+  <% fields_for "#{counter}subcats1", category do |f| %>
+    <%= f.select :id, @categories.collect { |c| [c.name, c.id] } %>
+  <% end %>
+</p>
+
+<p>
+  <% fields_for "#{counter}subcats2", category do |f| %>
+    <%= f.select :id, @categories.collect { |c| [c.name, c.id] } %>
+  <% end %>
+
+  <% fields_for "#{counter}subcats3", category do |f| %>
+    <%= f.select :id, @categories.collect { |c| [c.name, c.id] } %>
+  <% end %>
+</p>
+

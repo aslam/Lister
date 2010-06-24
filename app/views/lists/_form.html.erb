@@ -1,0 +1,53 @@
+<td style="vertical-align: top;">
+<h1>List Details</h1>
+  <%= form.error_messages %>
+
+  <p>
+    <%= form.label :name, "List Name*" %><br />
+    <%= form.text_field :name, :size => 75, :class => 'required' %>
+  </p>
+  <p>
+    <%= form.label :url, "List URL*" %><br />
+    <%= form.text_field :url, :size => 75, :class => 'required validate-url' %>
+  </p>
+  <p>
+    <%= form.label :description, "List Description*" %><br />
+    <%= form.text_area :description, :size => "85x10", :class => 'required' %>
+  </p>
+  <%= render :partial => 'category', :collection => @list.categories, :spacer_template => 'spacer' %>
+</td>
+<td style="vertical-align: top;">
+<% form.fields_for :address do |address_form| %>
+  <%= address_form.error_messages %>
+  <h2> Existing Location </h2>
+  <p>
+    <%= address_form.label :location %><br />
+    <%= address_form.select :location, Address::LOCATIONS.collect {|location| location},
+        {:prompt => 'Select Location'}, { :class => "validate-selection" } %>
+  </p>
+  <p>
+    <%= address_form.label :name %><br />
+    <%= address_form.text_field :name %>
+  </p>
+  <p>
+    <%= address_form.label :email %><br />
+    <%= address_form.text_field :email, :class => 'validate-email' %>
+  </p>
+  <p>
+    <%= address_form.label :mobile %><br />
+    <%= address_form.text_field :mobile, :class => 'validate-digits' %>
+  </p>
+  <p>
+    <%= address_form.label :phone %><br />
+    <%= address_form.text_field :phone, :class => 'validate-digits' %>
+  </p>
+  <p>
+    <%= address_form.label :fax %><br />
+    <%= address_form.text_field :fax, :class => 'validate-digits' %>
+  </p>
+  <p>
+    <%= form.submit 'Save' %>
+  </p>
+<% end %>
+</td>
+

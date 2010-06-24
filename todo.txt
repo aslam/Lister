@@ -1,0 +1,5 @@
+Address:
+    1. Add address fields to the excel report
+    2. On selecting a state, the cities should be populated (database of cities is yet to be received)
+    3. Atleast one category should be selected.
+

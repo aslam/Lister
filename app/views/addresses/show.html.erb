@@ -1,0 +1,38 @@
+<p>
+  <b>Location:</b>
+  <%=h @address.location %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @address.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @address.email %>
+</p>
+
+<p>
+  <b>Mobile:</b>
+  <%=h @address.mobile %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%=h @address.phone %>
+</p>
+
+<p>
+  <b>Fax:</b>
+  <%=h @address.fax %>
+</p>
+
+<p>
+  <b>List:</b>
+  <%=h @address.list %>
+</p>
+
+
+<%= link_to 'Edit', edit_address_path(@address) %> |
+<%= link_to 'Back', addresses_path %>

@@ -1,0 +1,23 @@
+<% @list.build_address if @list.address.nil? %>
+<% javascript 'dynamic_categories' %>
+<% stylesheet 'validation' %>
+<script language="javascript" type="text/javascript">
+  new Validation('new_list', {
+    immediate: true,
+    stopOnFirst:true,
+    useTitles : true
+  });
+</script>
+
+<div style="margin: 2em;">
+<table style="text-align: left; width: 967px;" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <% form_for(@list) do |f| %>
+        <%= render :partial => 'form', :object => f %>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+</div>
+

@@ -1,0 +1,13 @@
+<% @list.build_address if @list.address.nil? %>
+<div style="margin: 2em;">
+<table style="text-align: left; width: 967px;" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <% form_for(@list) do |f| %>
+        <%= render :partial => 'form', :object => f %>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+</div>
+

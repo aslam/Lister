@@ -1,0 +1,173 @@
+var categories = new Array();
+<% for category in @categories %>
+    categories.push(new Array(<%= category.parent_id %>, '<%=h category.name %>', <%= category.id %>));
+<% end %>
+
+function category1Selected() {
+    parent_id = $('1categories_id').getValue();
+    options = $('1subcats1_id').options;
+    options.length = 0;
+    categories.each(function(category) {
+        if (category[0] == parent_id){
+            options[options.length] = new Option(category[1], category[2]);
+        }
+    });
+    if (options.length == 0) {
+        $('1subcats1_id').hide();
+    } else {
+        $('1subcats1_id').show();
+    }
+}
+function subcat11Selected() {
+  parent_id = $('1subcats1_id').getValue();
+  options = $('1subcats2_id').options;
+  options.length = 0;
+  categories.each(function(category) {
+    if (category[0] == parent_id) {
+      options[options.length] = new Option(category[1], category[2]);
+    }
+  });
+  if (options.length == 0) {
+    $('1subcats2_id').hide();
+  } else {
+    $('1subcats2_id').show();
+  }
+}
+function subcat12Selected() {
+  parent_id = $('1subcats2_id').getValue();
+  options = $('1subcats3_id').options;
+  options.length = 0;
+  categories.each(function(category) {
+    if (category[0] == parent_id) {
+      options[options.length] = new Option(category[1], category[2]);
+    }
+  });
+  if (options.length == 0) {
+    $('1subcats3_id').hide();
+  } else {
+    $('1subcats3_id').show();
+  }
+}
+
+function category2Selected() {
+    parent_id = $('2categories_id').getValue();
+    options = $('2subcats1_id').options;
+    options.length = 0;
+    categories.each(function(category) {
+        if (category[0] == parent_id){
+            options[options.length] = new Option(category[1], category[2]);
+        }
+    });
+    if (options.length == 0) {
+        $('2subcats1_id').hide();
+    } else {
+        $('2subcats1_id').show();
+    }
+}
+function subcat21Selected(cat_id) {
+  parent_id = $('2subcats1_id').getValue();
+  options = $('2subcats2_id').options;
+  options.length = 0;
+  categories.each(function(category) {
+    if (category[0] == parent_id) {
+      options[options.length] = new Option(category[1], category[2]);
+    }
+  });
+  if (options.length == 0) {
+    $('2subcats2_id').hide();
+  } else {
+    $('2subcats2_id').show();
+  }
+}
+function subcat22Selected() {
+  parent_id = $('2subcats2_id').getValue();
+  options = $('2subcats3_id').options;
+  options.length = 0;
+  categories.each(function(category) {
+    if (category[0] == parent_id) {
+      options[options.length] = new Option(category[1], category[2]);
+    }
+  });
+  if (options.length == 0) {
+    $('2subcats3_id').hide();
+  } else {
+    $('2subcats3_id').show();
+  }
+}
+
+
+function category3Selected() {
+    parent_id = $('3categories_id').getValue();
+    options = $('3subcats1_id').options;
+    options.length = 0;
+    categories.each(function(category) {
+        if (category[0] == parent_id){
+            options[options.length] = new Option(category[1], category[2]);
+        }
+    });
+    if (options.length == 0) {
+        $('3subcats1_id').hide();
+    } else {
+        $('3subcats1_id').show();
+    }
+}
+
+function subcat31Selected(cat_id) {
+  parent_id = $('3subcats1_id').getValue();
+  options = $('3subcats2_id').options;
+  options.length = 0;
+  categories.each(function(category) {
+    if (category[0] == parent_id) {
+      options[options.length] = new Option(category[1], category[2]);
+    }
+  });
+  if (options.length == 0) {
+    $('3subcats2_id').hide();
+  } else {
+    $('3subcats2_id').show();
+  }
+}
+
+function subcat32Selected() {
+  parent_id = $('3subcats2_id').getValue();
+  options = $('3subcats3_id').options;
+  options.length = 0;
+  categories.each(function(category) {
+    if (category[0] == parent_id) {
+      options[options.length] = new Option(category[1], category[2]);
+    }
+  });
+  if (options.length == 0) {
+    $('3subcats3_id').hide();
+  } else {
+    $('3subcats3_id').show();
+  }
+}
+
+document.observe('dom:loaded', function() {
+    $('1subcats1_id').hide();
+    $('1subcats2_id').hide();
+    $('1subcats3_id').hide();
+
+    $('2subcats1_id').hide();
+    $('2subcats2_id').hide();
+    $('2subcats3_id').hide();
+
+    $('3subcats1_id').hide();
+    $('3subcats2_id').hide();
+    $('3subcats3_id').hide();
+
+    $('1categories_id').observe('change', category1Selected);
+    $('2categories_id').observe('change', category2Selected);
+    $('3categories_id').observe('change', category3Selected);
+
+    $('1subcats1_id').observe('change', subcat11Selected);
+    $('1subcats2_id').observe('change', subcat12Selected);
+
+    $('2subcats1_id').observe('change', subcat21Selected);
+    $('2subcats2_id').observe('change', subcat22Selected);
+
+    $('3subcats1_id').observe('change', subcat31Selected);
+    $('3subcats2_id').observe('change', subcat32Selected);
+});
+
