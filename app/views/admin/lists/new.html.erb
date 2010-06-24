@@ -2,11 +2,7 @@
 <% javascript 'dynamic_categories' %>
 <% stylesheet 'validation' %>
 <script language="javascript" type="text/javascript">
-  new Validation('new_list', {
-    immediate: true,
-    stopOnFirst:true,
-    useTitles : true
-  });
+  new Validation(document.forms[0]);
 </script>
 
 <div style="margin: 2em;">

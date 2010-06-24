@@ -1,12 +1,9 @@
 <% @list.build_address if @list.address.nil? %>
+
 <% javascript 'dynamic_categories' %>
 <% stylesheet 'validation' %>
 <script language="javascript" type="text/javascript">
-  new Validation('new_list', {
-    immediate: true,
-    stopOnFirst:true,
-    useTitles : true
-  });
+  new Validation('new_list',{stopOnFirst:true});
 </script>
 
 <div style="margin: 2em;">

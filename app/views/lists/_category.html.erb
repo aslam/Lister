@@ -1,4 +1,5 @@
 <% counter = category_counter + 1 %>
+
 <p>
   <%= label_tag "Category ID #{counter}:" %><br />
   <% fields_for "#{counter}categories", category do |f| %>

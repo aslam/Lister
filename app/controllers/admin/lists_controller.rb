@@ -181,8 +181,17 @@ class Admin::ListsController < Admin::BaseAdminController
         format.html { redirect_to(@list) }
         format.xml  { render :xml => @list, :status => :created, :location => @list }
       else
-        flash[:notice] = 'Unable to save List details. Please check wheter all mandatory fields are filled!'
+        msg = '<div id="errorExplanation" class="errorExplanation">'
+        msg += "<h2>#{@list.errors.size} errors prohibited this list from being saved</h2>"
+        msg += '<p>There were problems with the following fields:</p>'
+        msg += '<ul>'
+        @list.errors.full_messages.each do |m|
+          msg += '<li>' + m + '</li>'
+        end
+        msg += '</ul></div>'
+        flash[:notice] = msg
         format.html { redirect_to new_admin_list_url }
+        # format.html { render :action => :new }
         format.xml  { render :xml => @list.errors, :status => :unprocessable_entity }
       end
     end
