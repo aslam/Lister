@@ -1,6 +1,9 @@
 class Address < ActiveRecord::Base
   belongs_to :list
 
+  has_one :state
+  has_one :city
+
   LOCATIONS = [
     "Andaman & Nicobar", "Andhra Pradesh", "Arunachal Pradesh", "Assam",
     "Bihar", "Chasttisgarh", "Dadra & Nagar Haveli", "Daman & diu",
@@ -11,7 +14,7 @@ class Address < ActiveRecord::Base
     "Uttar pradesh", "Uttaranchal", "West Bengal"
   ]
 
-  validates_presence_of     :location
+  validates_presence_of     :state_id, :city_id
   validates_numericality_of :mobile, :phone, :fax, :greater_than => 8000000000, :allow_blank => true
   validates_length_of       :mobile, :is => 10, :allow_blank => true
   validates_length_of       :fax, :is => 10, :allow_blank => true

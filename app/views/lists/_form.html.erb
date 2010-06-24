@@ -22,8 +22,13 @@
   <h2> Existing Location </h2>
   <p>
     <%= address_form.label :location %><br />
-    <%= address_form.select :location, Address::LOCATIONS.collect {|location| location},
-        {:prompt => 'Select Location'}, { :class => "validate-selection" } %>
+    <%= address_form.collection_select :state_id, State.all, :id, :name, 
+        :prompt => 'Select Location' %>
+  </p>
+  <p id="city_field">
+    <%= address_form.label :city %><br />
+    <%= address_form.collection_select :city_id, City.all, :id, :name, 
+        :prompt => "Select a City" %>
   </p>
   <p>
     <%= address_form.label :name %><br />

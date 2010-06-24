@@ -1,3 +1,4 @@
+<% javascript 'dynamic_cities' %>
 <h1>New address</h1>
 
 <% form_for(@address) do |f| %>
@@ -5,7 +6,11 @@
 
   <p>
     <%= f.label :location %><br />
-    <%= f.select :location, Address::LOCATIONS.collect {|location| location}, {:prompt => 'Select Location'}, {} %>
+    <%= f.collection_select :state_id, State.all, :id, :name, :prompt => 'Select Location' %>
+  </p>
+  <p id="city_field">
+    <%= f.label :city %><br />
+    <%= f.collection_select :city_id, City.all, :id, :name, :prompt => 'Select City' %>
   </p>
   <p>
     <%= f.label :name %><br />

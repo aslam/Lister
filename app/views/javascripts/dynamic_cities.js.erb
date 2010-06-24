@@ -1,0 +1,26 @@
+var cities = new Array();
+<% for city in @cities %>
+    cities.push(new Array(<%= city.state_id %>, '<%=h city.name %>', <%= city.id %>));
+<% end %>
+
+function stateSelected() {
+    state_id = $('list_address_attributes_state_id').getValue();
+    options = $('list_address_attributes_city_id').options;
+    options.length = 1;
+    cities.each(function(city) {
+        if (city[0] == state_id) {
+            options[options.length] = new Option(city[1], city[2]);
+        }
+    });
+    if (options.length == 1) {
+        $('city_field').hide();
+    } else {
+        $('city_field').show();
+    }
+}
+
+document.observe('dom:loaded', function() {
+    $('city_field').hide();
+    $('list_address_attributes_state_id').observe('change', stateSelected);
+});
+

@@ -1,9 +1,5 @@
 <% @list.build_address if @list.address.nil? %>
-<% javascript 'dynamic_categories' %>
-<% stylesheet 'validation' %>
-<script language="javascript" type="text/javascript">
-  new Validation(document.forms[0]);
-</script>
+<% javascript 'dynamic_categories', 'dynamic_cities' %>
 
 <div style="margin: 2em;">
 <table style="text-align: left; width: 967px;" cellpadding="2" cellspacing="2">
