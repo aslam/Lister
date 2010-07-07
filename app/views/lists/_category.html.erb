@@ -1,7 +1,7 @@
 <% counter = category_counter + 1 %>
-
+<% lbl = (counter == 1 ? "Category ID #{counter} *" : "Category ID #{counter}") %>
 <p>
-  <%= label_tag "Category ID #{counter}:" %><br />
+  <%= label_tag "#{lbl}:" %><br />
   <% fields_for "#{counter}categories", category do |f| %>
     <%= f.select :id, @categories.collect { |c| [c.name, c.id] }, { :include_blank => true } %>
   <% end %>

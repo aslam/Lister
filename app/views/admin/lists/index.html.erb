@@ -2,21 +2,29 @@
 
 <table>
   <tr>
-    <th>ID</th>
+    <th>Created By</th>
     <th>Name</th>
     <th>Url</th>
     <th>Description</th>
+    <th>Status</th>
   </tr>
 
 <% @lists.each do |list| %>
   <tr>
-    <td><%=h list.id %></td>
+    <td><%= link_to list.user.login, edit_admin_user_path(list.user) if list.user %></td>
     <td><%=h list.name %></td>
     <td><%=h list.url %></td>
     <td><%=h list.description %></td>
-    <td><%= link_to 'Show', list %></td>
-    <!-- <td><%= link_to 'Edit', edit_admin_list_path(list) %></td> -->
-    <td><%= link_to 'Destroy', list, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%=h list.status %></td>
+    <td><%= link_to 'Show', admin_list_path(list) %></td>
+    <td>
+      <%=
+        link_to_if( !list.approved? || list.status.eql?('Not Approved'), 'Approve', "/approve/#{list.id}") do
+          link_to('Reject', "/reject/#{list.id}")
+        end
+      %>
+    </td>
+    <td><%= link_to 'Destroy', admin_list_path(list), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

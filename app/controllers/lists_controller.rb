@@ -16,7 +16,7 @@ class ListsController < ApplicationController
     headers['Content-Type'] = "application/vnd.ms-excel"
     headers['Content-Disposition'] = 'attachment; filename="lists.xls"'
     headers['Cache-Control'] = ''
-    @lists = List.all
+    @lists =  List.find(:all, :conditions => {:status => 'Approved'})
   end
 
   # GET /lists/1
@@ -33,7 +33,7 @@ class ListsController < ApplicationController
   # GET /lists/new
   # GET /lists/new.xml
   def new
-    @list   = List.new
+    @list   = List.new(params[:list]) || List.new
     3.times { @list.categories.build }
 
     @categories = []
@@ -47,6 +47,41 @@ class ListsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @list }
+    end
+  end
+
+  def check_url
+    url = params[:list_url]
+    list = List.find_by_url(url)
+
+    if list
+      render :js => "$('ok').style.display = 'none'; $('error').style.display = 'block'"
+    else
+      render :js => "$('error').style.display = 'none'; $('ok').style.display = 'block'"
+    end
+  end
+
+  def approve
+    @list = List.find(params[:id])
+
+    if @list.update_attribute('status', 'Approved')
+      flash[:notice] = 'List approved!'
+      redirect_to admin_lists_url
+    else
+      flash[:notice] = 'Unable to approve list this time!'
+      redirect_to admin_lists_url
+    end
+  end
+
+  def reject
+    @list = List.find(params[:id])
+
+    if @list.update_attribute('status', 'Rejected')
+      flash[:notice] = 'List rejected!'
+      redirect_to admin_lists_url
+    else
+      flash[:notice] = 'Unable to reject list this time!'
+      redirect_to admin_lists_url
     end
   end
 

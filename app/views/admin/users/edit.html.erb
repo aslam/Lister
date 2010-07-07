@@ -3,6 +3,6 @@
 <% form_for @user, :url => admin_account_path do |f| %>
     <%= f.error_messages %>
     <%= render :partial => "form", :object => f %>
-    <%= f.submit "Update" %>
+    <%= f.submit "Update" %> Or <%= link_to 'Cancel', :back %>
 <% end %>
 

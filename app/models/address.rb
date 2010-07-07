@@ -21,5 +21,11 @@ class Address < ActiveRecord::Base
   validates_format_of       :email,
                             :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
                             :allow_blank => true
+  validate  :any_one_of_phone_email_mobile_should_be_present
+
+  private
+  def any_one_of_phone_email_mobile_should_be_present
+    errors.add_to_base("You should provide atleast one of Phone number or Email or Mobile number.") if email.blank? and phone.blank? and mobile.blank?
+  end
 end
 

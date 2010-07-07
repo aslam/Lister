@@ -5,8 +5,12 @@ class List < ActiveRecord::Base
 
   validates_presence_of   :name, :url, :description, :address
   validates_uniqueness_of :url
-  validates_uri_existence_of :url, :with =>
-        /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
+  validates_length_of     :description, :minimum => 220,
+                          :too_short => "must be at least {{count}} words.",
+                          :tokenizer => lambda {|str| str.scan(/\w+/) }
+
+  # validates_uri_existence_of :url, :with =>
+  #       /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
 
   validate :atleast_one_category_must_be_selected
   validates_associated :address
@@ -14,6 +18,10 @@ class List < ActiveRecord::Base
   accepts_nested_attributes_for :address, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? }}
 
+
+  def approved?
+    self.status.eql?('Approved')
+  end
 
   def atleast_one_category_must_be_selected
     if categories.size == 0
