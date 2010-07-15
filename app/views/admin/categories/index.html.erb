@@ -1,26 +1,33 @@
-<h1>Listing categories</h1>
+<%= link_to 'New category', new_admin_category_path %> <br />
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Parent</th>
-    <th>Lft</th>
-    <th>Rgt</th>
-  </tr>
+<table class="list">
+  <caption> <h1> Listing Categories </h1> </caption>
+  <col class="col1" />
+  <col class="col2" />
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Parent</th>
+      <th>Lft</th>
+      <th>Rgt</th>
+    </tr>
+  </thead>
 
-<% @categories.each do |category| %>
-  <tr>
-    <td><%= category.id %></td>
-    <td><%=h category.name %></td>
-    <td><%=h category.parent_id %></td>
-    <td><%=h category.lft %></td>
-    <td><%=h category.rgt %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_admin_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.id %></td>
+        <td><%=h category.name %></td>
+        <td><%=h category.parent_id %></td>
+        <td><%=h category.lft %></td>
+        <td><%=h category.rgt %></td>
+        <td><%= link_to 'Show', admin_category_path(category) %></td>
+        <td><%= link_to 'Edit', edit_admin_category_path(category) %></td>
+        <td><%= link_to 'Destroy', admin_category_path(category), :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

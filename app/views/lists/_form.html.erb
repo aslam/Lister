@@ -15,6 +15,9 @@
 
     <div id="ok" style='color: green; display: none;'> The URL is OK </div>
     <div id="error" style='color: red; display: none;'> The URL is already taken! </div>
+    <div id="format" style='color: red; display: none;'>
+      The URL format is incorrect. The format is (http | https)://[www].example.(com | org | net | in)
+    </div>
   </p>
   <p>
     <%= form.label :description, "List Description*" %><br />
@@ -56,7 +59,7 @@
     <%= address_form.label :fax %><br />
     <%= address_form.text_field :fax, :class => 'validate-digits' %>
   </p>
-  <p> # - Any one of these fields should be present.
+  <p> # - Any one of these fields should be present. </p>
   <p>
     <%= form.submit 'Save' %>
   </p>

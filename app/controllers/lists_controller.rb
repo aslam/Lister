@@ -4,12 +4,14 @@ class ListsController < ApplicationController
   # GET /lists
   # GET /lists.xml
   def index
-    @lists = List.all
+    # @lists = List.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @lists }
-    end
+    # respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.xml  { render :xml => @lists }
+    # end
+    flash[:notice] = "You should be logged in as 'Admin' to see this page."
+    redirect_to new_list_url
   end
 
   def export
@@ -52,12 +54,22 @@ class ListsController < ApplicationController
 
   def check_url
     url = params[:list_url]
-    list = List.find_by_url(url)
+    list = nil
+    format = nil
 
-    if list
-      render :js => "$('ok').style.display = 'none'; $('error').style.display = 'block'"
+    if !url.match(/(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix).nil?
+      format = "OK"
+      list = List.find_by_url(url)
+    end
+
+    if format.nil?
+      render :js => "$('ok').style.display = 'none'; $('error').style.display = 'none'; $('format').style.display = 'block'"
     else
-      render :js => "$('error').style.display = 'none'; $('ok').style.display = 'block'"
+      if list.nil?
+        render :js => "$('error').style.display = 'none'; $('format').style.display = 'none', $('ok').style.display = 'block'"
+      else
+        render :js => "$('ok').style.display = 'none'; $('format').style.display = 'none', $('error').style.display = 'block'"
+      end
     end
   end
 
@@ -214,7 +226,7 @@ class ListsController < ApplicationController
     respond_to do |format|
       if @list.save
         flash[:notice] = 'List was successfully created.'
-        format.html { redirect_to(@list) }
+        format.html { redirect_to(new_list_url) }
         format.xml  { render :xml => @list, :status => :created, :location => @list }
       else
         msg = '<div id="errorExplanation" class="errorExplanation">'

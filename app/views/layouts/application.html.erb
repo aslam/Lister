@@ -12,14 +12,22 @@
   <%= yield(:head) %>
 </head>
 <body>
-  <%=
-    link_to_if(@current_user, "Logout", logout_path) do
-      link_to("Login", login_path)
-    end
-  %>
-
+  <div id="header">
+    <div id="links" class="left">
+      <% unless @current_user %>
+        <%= link_to 'Admin', admin_root_path %> |
+      <% else %>
+        <b> Welcome, <%= @current_user.login %> </b>
+      <% end %>
+      <%=
+        link_to_if(@current_user, "Logout", logout_path) do
+          link_to("Login", login_path)
+        end
+      %>
+    </div>
+  </div>
   <div id="container">
-    <div id="notice"> <p style="color: green"><%= flash[:notice] %></p> </div>
+    <div class="notice"> <%= flash[:notice] %> </div>
 
     <div id="content"> <%= yield %> </div>
   </div>

@@ -1,15 +1,23 @@
 <% @list.build_address if @list.address.nil? %>
 <% javascript 'dynamic_categories', 'dynamic_cities' %>
 
+<div id="counts">
+  <div> <b> Lists Done: </b> <%= @current_admin.lists.count %> </div>
+  <div>
+    <b> Accepted: </b> <%= @current_admin.lists.approved_count %>
+    <b> Rejected: </b> <%= @current_admin.lists.rejected_count %>
+  </div>
+</div>
+
 <div style="margin: 2em;">
-<table style="text-align: left; width: 967px;" cellpadding="2" cellspacing="2">
-  <tbody>
-    <tr>
-      <% form_for @list, :url => admin_lists_path do |f| %>
-        <%= render :partial => 'form', :object => f %>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
+  <table style="text-align: left; width: 967px;" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <% form_for @list, :url => admin_lists_path do |f| %>
+          <%= render :partial => 'form', :object => f %>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
 </div>
 

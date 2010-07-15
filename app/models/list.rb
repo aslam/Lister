@@ -4,10 +4,14 @@ class List < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of   :name, :url, :description, :address
+
   validates_uniqueness_of :url
+  validates_format_of     :url,
+      :with => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix,
+      :message => "The URL format is incorrect. The format is (http | https)://[www].example.(com | org | net | in)."
+
   validates_length_of     :description, :minimum => 220,
-                          :too_short => "must be at least {{count}} words.",
-                          :tokenizer => lambda {|str| str.scan(/\w+/) }
+                          :too_short => "must be at least {{count}} characters."
 
   # validates_uri_existence_of :url, :with =>
   #       /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix

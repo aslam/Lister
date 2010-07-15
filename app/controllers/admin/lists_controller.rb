@@ -16,7 +16,28 @@ class Admin::ListsController < Admin::BaseAdminController
     headers['Content-Type'] = "application/vnd.ms-excel"
     headers['Content-Disposition'] = 'attachment; filename="lists.xls"'
     headers['Cache-Control'] = ''
-    @lists = List.all
+    @lists =  List.find(:all, :conditions => {:status => 'Approved'})
+  end
+
+  def check_url
+    url = params[:list_url]
+    list = nil
+    format = nil
+
+    if !url.match(/(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix).nil?
+      format = "OK"
+      list = List.find_by_url(url)
+    end
+
+    if format.nil?
+      render :js => "$('ok').style.display = 'none'; $('error').style.display = 'none'; $('format').style.display = 'block'"
+    else
+      if list.nil?
+        render :js => "$('error').style.display = 'none'; $('format').style.display = 'none', $('ok').style.display = 'block'"
+      else
+        render :js => "$('ok').style.display = 'none'; $('format').style.display = 'none', $('error').style.display = 'block'"
+      end
+    end
   end
 
   # GET /lists/1

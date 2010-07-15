@@ -11,20 +11,24 @@
   <%= yield(:head) %>
 </head>
 <body>
-  <% if @current_admin %>
-    <%= link_to 'categories', admin_categories_url %> |
-    <%= link_to 'lists', admin_lists_url %> |
-    <%= link_to 'users', admin_users_url %> |
-  <% end %>
-  <%=
-    link_to_if(@current_admin, "Logout", admin_logout_path) do
-      link_to("Login", admin_login_path)
-    end
-  %>
-
+  <div id="header">
+    <div id="links" class="left">
+      <% if @current_admin %>
+        <b> Welcome, <%= @current_admin.login %> </b>
+        <%= link_to 'categories', admin_categories_url %> |
+        <%= link_to 'lists', admin_lists_url %> |
+        <%= link_to 'users', admin_users_url %> |
+      <% end %>
+      <%=
+        link_to_if(@current_admin, "Logout", admin_logout_path) do
+          link_to("Login", admin_login_path)
+        end
+      %>
+    </div>
+  </div>
   <div id="container">
-    <div id="notice"> <p style="color: green"><%= flash[:notice] %></p> </div>
-    <div id="notice"> <p style="color: red"><%= flash[:error] %></p> </div>
+    <div class="notice"> <%= flash[:notice] %> </div>
+    <div class="notice"> <%= flash[:error] %> </div>
 
     <div id="content"> <%= yield %> </div>
   </div>

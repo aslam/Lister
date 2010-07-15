@@ -64,7 +64,7 @@ class Admin::CategoriesController < Admin::BaseAdminController
     respond_to do |format|
       if @category.update_attributes(params[:category])
         flash[:notice] = 'Category was successfully updated.'
-        format.html { redirect_to(@category) }
+        format.html { redirect_to(admin_category_path(@category)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
