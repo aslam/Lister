@@ -24,8 +24,8 @@
         <td><%= link_to 'Show', admin_list_path(list) %></td>
         <td>
           <%=
-            link_to_if( !list.approved? || list.status.eql?('Not Approved'), 'Approve', "/approve/#{list.id}") do
-              link_to('Reject', "/reject/#{list.id}")
+            link_to_if( !list.approved? || list.status.eql?('Not Approved'), 'Approve', "/admin/approve/#{list.id}") do
+              link_to('Reject', "/admin/reject/#{list.id}")
             end
           %>
         </td>

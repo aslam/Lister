@@ -40,6 +40,30 @@ class Admin::ListsController < Admin::BaseAdminController
     end
   end
 
+  def approve
+    @list = List.find(params[:id])
+
+    if @list.update_attribute('status', 'Approved')
+      flash[:notice] = 'List approved!'
+      redirect_to admin_lists_url
+    else
+      flash[:notice] = 'Unable to approve list this time!'
+      redirect_to admin_lists_url
+    end
+  end
+
+  def reject
+    @list = List.find(params[:id])
+
+    if @list.update_attribute('status', 'Rejected')
+      flash[:notice] = 'List rejected!'
+      redirect_to admin_lists_url
+    else
+      flash[:notice] = 'Unable to reject list this time!'
+      redirect_to admin_lists_url
+    end
+  end
+
   # GET /lists/1
   # GET /lists/1.xml
   def show

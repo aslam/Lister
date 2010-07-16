@@ -27,8 +27,8 @@ ActionController::Routing::Routes.draw do |map|
         admin.resources :users
         admin.resources :lists
         admin.resources :categories
-        map.connect '/approve/:id', :controller => 'lists', :action => 'approve'
-        map.connect '/reject/:id',  :controller => 'lists', :action => 'reject'
+        map.connect '/admin/approve/:id', :controller => 'admin/lists', :action => 'approve'
+        map.connect '/admin/reject/:id',  :controller => 'admin/lists', :action => 'reject'
         admin.root :controller => 'admin_sessions', :action => :new
     end
 
