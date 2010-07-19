@@ -1,25 +1,43 @@
-<p>
-  <b>Name:</b>
-  <%=h @list.name %>
-</p>
+<table class="list">
+  <caption> <h1> List #<%= @list.id %> </h1> </caption>
+  <col class="col1" />
+  <col class="col2" />
 
-<p>
-  <b>Url:</b>
-  <%=h @list.url %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%=h @list.description %>
-</p>
-
-<p>
-  <b>Category:</b> <br />
-  <% @list.categories.each do |cat| %>
-    <%=h "#{cat.self_and_ancestors.map(&:name).join(' > ')}" %> <br />
-  <% end %>
-</p>
-
+  <tbody>
+    <tr>
+      <td style="text-align: right;"><b>Name</b></td>
+      <td style="text-align: left;"><%=h @list.name %></td>
+    </tr>
+    <tr>
+      <td style="text-align: right;"><b>Url</b></td>
+      <td style="text-align: left;"><%=h @list.url %></td>
+    </tr>
+    <tr>
+      <td style="text-align: right;"><b>Description</b></td>
+      <td style="text-align: left;"><%=h @list.description %></td>
+    </tr>
+    <tr>
+      <td style="text-align: right;"><b>Categories</b></th>
+      <td style="text-align: left;">
+        <% @list.categories.each do |cat| %>
+          <%=h "#{cat.self_and_ancestors.map(&:name).join(' > ')}" %> <br />
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: right;"><b>Address</b></td>
+      <td style="text-align: left;">
+        <%= @list.address.name %> <br />
+        <%= @list.address.city.name %>, <%= @list.address.state.name %> <br />
+        <br />
+        Email: <%= @list.address.email %> <br />
+        Mobile: <%= @list.address.mobile %> <br />
+        Phone: <%= @list.address.phone %> <br />
+        Fax: <%= @list.address.fax %> <br />
+      </td>
+    </tr>
+  </tbody>
+</table>
 <%#= link_to 'Edit', edit_list_path(@list) %>
 <%= link_to 'Back', admin_lists_path %>
 

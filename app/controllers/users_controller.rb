@@ -27,13 +27,18 @@ class UsersController < ApplicationController
     end
 
     def update
-        @user = current_user
-        if @user.update_attributes(params[:user])
-            flash[:notice] = "Account updated!"
-            redirect_to account_url
-        else
-            render :action => :edit
-        end
+      @user = current_user
+
+      respond_to do |format|
+    		if @user.update_attributes(params[:user])
+      		flash[:notice] = 'Profile was successfully updated. Please login again.'
+      		format.html { redirect_to(login_path) }
+      		format.xml  { head :ok }
+    		else
+      		format.html { render :action => "edit" }
+      		format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+    		end
+    	end
     end
 end
 

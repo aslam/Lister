@@ -19,15 +19,12 @@
         <td><%= link_to list.user.login, edit_admin_user_path(list.user) if list.user %></td>
         <td><%=h list.name %></td>
         <td><%=h list.url %></td>
-        <td><%=h truncate(list.description, 80) %></td>
+        <td><%=h truncate(list.description, 60) %></td>
         <td><%=h list.status %></td>
         <td><%= link_to 'Show', admin_list_path(list) %></td>
         <td>
-          <%=
-            link_to_if( !list.approved? || list.status.eql?('Not Approved'), 'Approve', "/admin/approve/#{list.id}") do
-              link_to('Reject', "/admin/reject/#{list.id}")
-            end
-          %>
+            <%= link_to 'Approve', "/admin/approve/#{list.id}" %> |
+            <%= link_to 'Reject', "/admin/reject/#{list.id}" %>
         </td>
         <td><%= link_to 'Destroy', admin_list_path(list), :confirm => 'Are you sure?', :method => :delete %></td>
       </tr>
