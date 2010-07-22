@@ -17,8 +17,7 @@ class Address < ActiveRecord::Base
   validates_presence_of     :state_id, :city_id
   validates_numericality_of :mobile, :greater_than => 8000000000, :allow_blank => true
   validates_length_of       :mobile, :is => 10, :allow_blank => true
-  validates_length_of       :phone, :in => 6..8
-  validates_length_of       :fax, :is => 10, :allow_blank => true
+  validates_length_of       :phone, :fax, :in => 6..8, :allow_blank => true
   validates_format_of       :email,
                             :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
                             :allow_blank => true
